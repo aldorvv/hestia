@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {API_URL} from '../../constants/constants'
 import axios from 'axios';
 
 function RegistrationForm(props) {
@@ -20,13 +21,12 @@ function RegistrationForm(props) {
         }))
     }
 
-    const handleSubmitClick = (e) => {
-        console.log(state.password, state.confirmPassword);
+    const handleFormSubmit = (e) => {
         e.preventDefault();
         if(state.password === state.confirmPassword) {
             sendDetailsToServer()    
         } else {
-            props.showError('Passwords do not match');
+            props.showError('Las contraseñas no coinciden');
         }
     };
 
@@ -44,7 +44,7 @@ function RegistrationForm(props) {
                 "email": state.email,
                 "password": state.password,
             }
-            axios.post("http://localhost:8080/api/v1/users/", payload)
+            axios.post(API_URL + "/users", payload)
                 .then(function (response) {
                     if(response.status === 200){
                         setState(prevState => ({
@@ -67,68 +67,67 @@ function RegistrationForm(props) {
     }
 
     return(
-        <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
-            <form>
-                <div className="form-group text-left">
-                <label htmlFor="firstName">Nombre</label>
-                <input type="text" 
-                       className="form-control" 
-                       id="firstName" 
-                       placeholder="Ingresa tu nombre"
-                       value={state.firstName}
-                       onChange={handleChange}
-                />
-                <label htmlFor="lastName">Apellido</label>
-                <input type="text" 
-                       className="form-control" 
-                       id="lastName" 
-                       placeholder="Ingresa tu apellido"
-                       value={state.lastName}
-                       onChange={handleChange}
-                />
-                <label htmlFor="usernameInput">Nombre de usuario</label>
-                <input type="text" 
-                       className="form-control" 
-                       id="username" 
-                       placeholder="Enter username"
-                       value={state.username}
-                       onChange={handleChange}
-                />
-                <label htmlFor="exampleInputEmail1">Email</label>
-                <input type="email" 
-                       className="form-control" 
-                       id="email" 
-                       aria-describedby="emailHelp" 
-                       placeholder="Enter email"
-                       value={state.email}
-                       onChange={handleChange}
-                />
-                <small id="emailHelp" className="form-text text-muted">Tu email no será compartido con nadie.</small>
-                </div>
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Contraseña</label>
-                    <input type="password" 
-                        className="form-control" 
-                        id="password" 
-                        placeholder="Contraseña"
-                        value={state.password}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="form-group text-left">
-                    <label htmlFor="exampleInputPassword1">Confirmar Contraseña</label>
-                    <input type="password" 
-                        className="form-control" 
-                        id="confirmPassword" 
-                        placeholder="Contraseña"
-                        value={state.confirmPassword}
-                        onChange={handleChange}
-                    />
-                </div>
-                <button type="submit" className="btn btn-primary" onClick={handleSubmitClick}>
-                    Register
-                </button>
-            </form>
+        <div className='h-screen flex bg-gray-bg1'>
+            <div className='w-full max-w-md m-auto bg-white rounded-lg border border-primaryBorder shadow-default py-10 px-16'>
+                <h1 className='text-2xl font-medium text-primary mt-4 mb-12 text-center'>
+                    ¡Regístrate!
+                </h1>
+
+                <form onSubmit={handleFormSubmit}>
+                    <div>
+                        <label htmlFor='email'>Correo Electrónico</label>
+                        <input
+                            type='email'
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            id='email'
+                            placeholder='me@example.com'
+                            value={state.email}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor='username'>Usuario</label>
+                        <input
+                            type='text'
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            id='username'
+                            placeholder='Nombre de usuario'
+                            value={state.username}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor='password'>Contraseña</label>
+                        <input
+                            type='password'
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            id='password'
+                            placeholder='Contraseña'
+                            value={state.password}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor='password-confirm'>Confirmar contraseña</label>
+                        <input
+                            type='password'
+                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            id='confirmPassword'
+                            placeholder='Confirmar contraseña'
+                            value={state.confirmPassword}
+                            onChange={handleChange}
+                        />
+                    </div>
+
+                    <div className='flex justify-center items-center mt-6'>
+                        <button
+                            className={`bg-green py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
+                        >
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }
