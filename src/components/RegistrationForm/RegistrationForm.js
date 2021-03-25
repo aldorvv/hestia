@@ -38,8 +38,6 @@ function RegistrationForm(props) {
     const sendDetailsToServer = () => {
         if(state.email.length && state.password.length) {
             const payload={
-                "first_name": state.firstName,
-                "last_name": state.lastName,
                 "username": state.username,
                 "email": state.email,
                 "password": state.password,
