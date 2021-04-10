@@ -1,15 +1,12 @@
 import React, {useState} from 'react';
-import axios from 'axios';
 
+import api from "../../services/index";
 
-const API_URL = 'http://localhost:8080/api/v2';
 function RegistrationForm(props) {
 
     const [state , setState] = useState({
         email : "",
         password : "",
-        firstName : "",
-        lastName : "",
         username: "",
         confirmPassword: "",
     })
@@ -32,26 +29,25 @@ function RegistrationForm(props) {
     };
 
     const redirectToHome = () => {
-        props.updateTitle('Home')
         props.history.push('/');
     }
 
     const sendDetailsToServer = () => {
         if(state.email.length && state.password.length) {
-            const payload={
+            let payload = {
                 "username": state.username,
+                "name": state.name,
                 "email": state.email,
                 "password": state.password,
             }
-            axios.post(API_URL + "/users", payload)
+            api.post("http://localhost:8080/api/v2/users", payload)
                 .then(function (response) {
-                    if(response.status === 200){
+                    if (response.status === 201) {
                         setState(prevState => ({
                             ...prevState,
                             'successMessage' : 'Usuario registrado'
                         }))
                         redirectToHome();
-                        props.showError(null)
                     } else{
                         props.showError("algo salió mal");
                     }
@@ -73,6 +69,16 @@ function RegistrationForm(props) {
                 </h1>
 
                 <form onSubmit={handleFormSubmit}>
+                    <div>
+                        <label htmlFor='name'>Nombre(s)</label>
+                        <input
+                            type='text'
+                            className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            id='name'
+                            value={state.name}
+                            onChange={handleChange}
+                        />
+                    </div>
                     <div>
                         <label htmlFor='email'>Correo Electrónico</label>
                         <input
@@ -120,7 +126,8 @@ function RegistrationForm(props) {
 
                     <div className='flex justify-center items-center mt-6'>
                         <button
-                            className={`bg-green py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
+                            className={`bg-green py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:bg-green-dark hover:bg-green-dark`}
+                            type="submit"
                         >
                             Enviar
                         </button>

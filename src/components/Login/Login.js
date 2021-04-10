@@ -11,7 +11,7 @@ const Login = () => {
             "password": password
         }
 
-        axios.post(API_URL + "/users/login", payload)
+        axios.post("http://localhost:8080/api/v2/login", payload)
              .then(response => {let token = response.data.token;});
     }
 
@@ -54,6 +54,7 @@ const Login = () => {
                     <div className='flex justify-center items-center mt-6'>
                         <button
                             className={`bg-green py-2 px-4 text-sm text-white rounded border border-green focus:outline-none focus:border-green-dark`}
+                            type="submit"
                         >
                             Enviar
                         </button>
