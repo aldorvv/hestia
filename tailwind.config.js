@@ -6,26 +6,17 @@ module.exports = {
             transparent: 'transparent',
             current: 'currentColor',
             white: {
-                DEFAULT: '#ffffff',
+                DEFAULT: '#e8e6ea',
             },
             green: {
-                light: '#6fcf97',
-                DEFAULT: '#27AE60',
-                dark: '#219653',
-                darker: '#1e874b',
+                DEFAULT: '#8cb27f',
+                dark: '#55725d'
             },
-            red: {
-                light: '#FFEAEA',
-                DEFAULT: '#EB5757',
-                dark: '#C20D0D',
-            },
-            orange: {
-                light: '#FFEBDA',
-                DEFAULT: '#F66A0A',
-                dark: '#A04100',
+            blue: {
+                DEFAULT: '#073f5a'
             },
             primary: {
-                DEFAULT: '#24292E',
+                DEFAULT: '#1f1c17',
             },
             warning: {
                 DEFAULT: '#D1711C',

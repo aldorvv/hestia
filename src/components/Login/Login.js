@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 
-import {API_URL} from '../../constants/constants'
-
+const API_URL = 'http://localhost:8080/api/v2';
 
 const Login = () => {
 

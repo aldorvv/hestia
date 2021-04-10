@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {API_URL} from '../../constants/constants'
 import axios from 'axios';
 
+
+const API_URL = 'http://localhost:8080/api/v2';
 function RegistrationForm(props) {
 
     const [state , setState] = useState({
@@ -76,7 +77,7 @@ function RegistrationForm(props) {
                         <label htmlFor='email'>Correo Electrónico</label>
                         <input
                             type='email'
-                            className={`w-full p-2 text-primary border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
+                            className={`w-full p-2 border rounded-md outline-none text-sm transition duration-150 ease-in-out mb-4`}
                             id='email'
                             placeholder='me@example.com'
                             value={state.email}
