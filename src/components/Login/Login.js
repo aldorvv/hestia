@@ -1,18 +1,20 @@
-import axios from 'axios';
 import React from 'react';
-
-const API_URL = 'http://localhost:8080/api/v2';
+import Instance from '../Services/Services';
 
 const Login = () => {
 
     const sendDetailsToServer = (username, password) => {
+        console.log(password);
         const payload = {
             "username": username,
             "password": password
         }
 
-        axios.post("http://localhost:8080/api/v2/login", payload)
-             .then(response => {let token = response.data.token;});
+        Instance.post("/login", payload)
+             .then(response => {
+                 let token = response.data.token;
+                console.log(token);
+             })
     }
 
     const handleFormSubmit = (e) => {

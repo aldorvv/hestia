@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-
-import api from "../../services/index";
+import Instance from '../Services/Services';
 
 function RegistrationForm(props) {
 
@@ -12,7 +11,7 @@ function RegistrationForm(props) {
     })
 
     const handleChange = (e) => {
-        const {id , value} = e.target   
+        const { id , value } = e.target
         setState(prevState => ({
             ...prevState,
             [id] : value
@@ -40,7 +39,7 @@ function RegistrationForm(props) {
                 "email": state.email,
                 "password": state.password,
             }
-            api.post("http://localhost:8080/api/v2/users", payload)
+            Instance.post("/users", payload)
                 .then(function (response) {
                     if (response.status === 201) {
                         setState(prevState => ({
